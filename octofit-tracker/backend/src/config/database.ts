@@ -23,3 +23,16 @@ export async function disconnectFromDatabase() {
 
   await mongoose.disconnect();
 }
+
+export const connectDB = async () => {
+  try {
+    const conn = await connectToDatabase();
+    console.log('MongoDB connected:', mongoUri);
+    return conn;
+  } catch (err) {
+    console.error('MongoDB connection error:', err);
+    process.exit(1);
+  }
+};
+
+export default mongoose;
