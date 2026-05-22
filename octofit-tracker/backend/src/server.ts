@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
-import mongoose from 'mongoose';
+
+import mongoose, { connectDB } from './database';
 
 import usersRouter from './routes/users';
 import teamsRouter from './routes/teams';
@@ -9,7 +10,7 @@ import workoutsRouter from './routes/workouts';
 
 const app = express();
 const port = Number(process.env.PORT) || 8000;
-const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/octofit_db';
+
 
 const codespaceName = process.env.CODESPACE_NAME;
 const baseUrl = codespaceName
@@ -34,16 +35,9 @@ app.get('/api/health', (_req: Request, res: Response) => {
 });
 
 const start = async () => {
-  try {
-    await mongoose.connect(mongoUri);
-    console.log(`MongoDB connected: ${mongoUri}`);
-  } catch (error) {
-    console.error('MongoDB connection failed:', error);
-  }
-
+  await connectDB();
   app.listen(port, () => {
     console.log(`OctoFit backend listening on ${baseUrl}`);
   });
 };
-
 start();
