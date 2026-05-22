@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 
-import mongoose, { connectDB } from './database';
+import mongoose, { connectDB } from './config/database';
 
 import usersRouter from './routes/users';
 import teamsRouter from './routes/teams';
