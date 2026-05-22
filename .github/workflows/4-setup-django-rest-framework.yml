@@ -145,6 +145,7 @@ jobs:
       - name: Disable current workflow and enable next one
         run: |
           gh workflow disable "${{github.workflow}}"
-          gh workflow enable "Step 5"
+          NEXT_WORKFLOW_ID=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows" --jq '.workflows[] | select(.name == "Step 5") | .id')
+          gh api --method PUT "repos/$GITHUB_REPOSITORY/actions/workflows/$NEXT_WORKFLOW_ID/enable"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
