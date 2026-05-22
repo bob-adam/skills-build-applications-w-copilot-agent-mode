@@ -1,10 +1,14 @@
 import ResourcePage from './ResourcePage.jsx'
 
 function Leaderboard() {
+  const endpoint = import.meta.env.VITE_CODESPACE_NAME
+    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`
+    : 'http://localhost:8000/api/leaderboard/'
+
   return (
     <ResourcePage
       title="Leaderboard"
-      description="Competitive ranking snapshots fed by the backend leaderboard endpoint."
+      description={`Competitive ranking snapshots fed by the backend leaderboard endpoint. Source: ${endpoint}`}
       resource="leaderboard"
       emptyMessage="No leaderboard entries were returned from the API."
       renderCard={(entry, index) => (

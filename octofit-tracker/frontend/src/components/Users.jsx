@@ -1,10 +1,14 @@
 import ResourcePage from './ResourcePage.jsx'
 
 function Users() {
+  const endpoint = import.meta.env.VITE_CODESPACE_NAME
+    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/users/`
+    : 'http://localhost:8000/api/users/'
+
   return (
     <ResourcePage
       title="Users"
-      description="Profiles, contact details and team membership from the logic tier."
+      description={`Profiles, contact details and team membership from the logic tier. Source: ${endpoint}`}
       resource="users"
       emptyMessage="No users were returned. Confirm the API returns an array or a paginated payload."
       renderCard={(user, index) => (

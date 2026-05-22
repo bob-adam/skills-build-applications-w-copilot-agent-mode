@@ -1,10 +1,14 @@
 import ResourcePage from './ResourcePage.jsx'
 
 function Workouts() {
+  const endpoint = import.meta.env.VITE_CODESPACE_NAME
+    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/workouts/`
+    : 'http://localhost:8000/api/workouts/'
+
   return (
     <ResourcePage
       title="Workouts"
-      description="Suggested sessions with difficulty and training goals for each user segment."
+      description={`Suggested sessions with difficulty and training goals for each user segment. Source: ${endpoint}`}
       resource="workouts"
       emptyMessage="No workouts were returned from the API."
       renderCard={(workout, index) => {

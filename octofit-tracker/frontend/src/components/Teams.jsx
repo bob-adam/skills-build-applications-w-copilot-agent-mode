@@ -1,10 +1,14 @@
 import ResourcePage from './ResourcePage.jsx'
 
 function Teams() {
+  const endpoint = import.meta.env.VITE_CODESPACE_NAME
+    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+    : 'http://localhost:8000/api/teams/'
+
   return (
     <ResourcePage
       title="Teams"
-      description="Track squad structure, membership and collaboration across the app."
+      description={`Track squad structure, membership and collaboration across the app. Source: ${endpoint}`}
       resource="teams"
       emptyMessage="No teams were returned from the API."
       renderCard={(team, index) => {

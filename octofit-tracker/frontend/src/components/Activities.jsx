@@ -1,10 +1,14 @@
 import ResourcePage from './ResourcePage.jsx'
 
 function Activities() {
+  const endpoint = import.meta.env.VITE_CODESPACE_NAME
+    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities/`
+    : 'http://localhost:8000/api/activities/'
+
   return (
     <ResourcePage
       title="Activities"
-      description="Recent exercise sessions with duration, calories and workout type."
+      description={`Recent exercise sessions with duration, calories and workout type. Source: ${endpoint}`}
       resource="activities"
       emptyMessage="No activity records were returned from the API."
       renderCard={(activity, index) => (
