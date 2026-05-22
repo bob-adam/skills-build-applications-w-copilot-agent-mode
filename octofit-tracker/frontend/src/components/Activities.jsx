@@ -15,15 +15,19 @@ function Activities() {
         <article className="resource-card" key={activity._id || activity.id || `activity-${index}`}>
           <div>
             <h3>{activity.type || activity.name || `Activity ${index + 1}`}</h3>
+            {activity.description ? <p>{activity.description}</p> : null}
             <p>
-              {activity.date
-                ? new Date(activity.date).toLocaleString()
-                : 'Date unavailable'}
+              {activity.schedule
+                ? `Schedule: ${activity.schedule}`
+                : activity.date
+                  ? new Date(activity.date).toLocaleString()
+                  : 'Date unavailable'}
             </p>
           </div>
           <div className="resource-meta">
             {activity.duration ? <span className="resource-chip">{activity.duration} min</span> : null}
             {activity.calories ? <span className="resource-chip">{activity.calories} kcal</span> : null}
+            {activity.maxAttendance ? <span className="resource-chip">Max {activity.maxAttendance} people</span> : null}
           </div>
         </article>
       )}
